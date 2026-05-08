@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Portfolio · Hoàng Mạnh Dũng · ULIS</title>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Clash+Display:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
-<!-- Clash Display fallback via CDN -->
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -21,10 +20,10 @@
   --deep:  #080b1e;
 
   --lime:  #b8ff00;    /* electric lime — the WOW anchor */
-  --mag:   #ff2d78;    /* hot magenta                   */
-  --amber: #ffab00;    /* liquid amber                  */
+  --mag:   #ff2d78;    /* hot magenta                  */
+  --amber: #ffab00;    /* liquid amber                 */
   --cyan:  #00e5d4;    /* deep teal-cyan                */
-  --violet:#7b3fe4;    /* deep violet                   */
+  --violet:#7b3fe4;    /* deep violet                  */
   --ice:   #c8f0ff;    /* pale ice highlight            */
   --white: #f0f4ff;
 
@@ -155,21 +154,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 
 /* profile picture */
 .profile-wrap{
-  width:100%;aspect-ratio:1;overflow:hidden;position:relative;cursor:pointer;
+  width:100%;aspect-ratio:1;overflow:hidden;position:relative;cursor:default;
   background:linear-gradient(135deg,rgba(184,255,0,.07),rgba(0,229,212,.07),rgba(255,45,120,.06));
   border-bottom:1px solid rgba(255,255,255,.06);
   display:flex;align-items:center;justify-content:center;
 }
-.profile-wrap:hover .upload-hint{opacity:1}
-.profile-wrap img{width:100%;height:100%;object-fit:cover;display:none;transition:transform .4s}
+.profile-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
 .profile-wrap:hover img{transform:scale(1.04)}
-.profile-placeholder{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--muted);pointer-events:none}
-.profile-placeholder svg{width:52px;height:52px;opacity:.35}
-.profile-placeholder p{font-family:var(--fM);font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.4}
-.profile-placeholder small{font-family:var(--fM);font-size:9px;opacity:.28;margin-top:-4px}
-.upload-hint{position:absolute;inset:0;background:rgba(184,255,0,.08);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;pointer-events:none}
-.upload-hint span{font-family:var(--fM);font-size:10px;letter-spacing:.14em;color:var(--lime);text-transform:uppercase}
-#avatarInput{display:none}
 
 .id-body{padding:22px 24px 26px}
 .id-name{font-family:var(--fH);font-weight:700;font-size:21px;letter-spacing:.01em;margin-bottom:4px;
@@ -267,14 +258,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 
 /* when file is loaded → show iframe */
 .pdf-viewer{
-  display:none;width:100%;height:420px;border:none;border-radius:10px;overflow:hidden;
+  width:100%;height:420px;border:none;border-radius:10px;overflow:hidden;
   background:#000;
 }
-.pdf-viewer iframe{width:100%;height:100%;border:none;border-radius:10px}
+.pdf-viewer object, .pdf-viewer embed {width:100%;height:100%;border:none;border-radius:10px}
 
 /* open-in-tab link */
 .pdf-open{
-  display:none;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  font-size:10px;letter-spacing:.12em;text-transform:uppercase;
   font-family:var(--fM);text-decoration:none;
   padding:8px 16px;border-radius:6px;border:1px solid;
   transition:background .2s;margin-top:10px;
@@ -300,6 +291,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 }
 .pdf-clear:hover{border-color:rgba(255,255,255,.25);color:var(--white)}
 
+/* prog bars */
+.prog-wrap{margin-bottom:20px}
+.prog-label{display:flex;justify-content:space-between;font-family:var(--fS);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dust);margin-bottom:6px}
+.prog-bar{height:2px;background:var(--faint)}
+.prog-fill{height:100%;width:0%;transition:width 1.1s cubic-bezier(.22,1,.36,1) .15s}
+.pf1,.pf4{background:var(--sienna)}
+.pf2,.pf5{background:var(--moss)}
+.pf3,.pf6{background:var(--gold)}
+.mod.in .pf1{width:100%; background: var(--lime)}
+.mod.in .pf2{width:100%; background: var(--cyan)}
+.mod.in .pf3{width:60%; background: var(--violet)}
+.mod.in .pf4{width:50%; background: var(--mag)}
+.mod.in .pf5{width:45%; background: var(--amber)}
+.mod.in .pf6{width:40%; background: var(--ice)}
+
 /* ── RIPPLE ── */
 .ripple{position:absolute;border-radius:50%;transform:scale(0);animation:rip .65s linear;pointer-events:none}
 @keyframes rip{to{transform:scale(4);opacity:0}}
@@ -315,11 +321,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
   background:linear-gradient(135deg,var(--lime),var(--cyan),var(--mag),var(--amber));
   -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-.reflect-body p{font-family:var(--fB);font-size:15px;line-height:1.9;color:rgba(240,244,255,.72);margin-bottom:18px}
+.reflect-body p{font-size:15px;line-height:1.85;color:rgba(232,238,255,.72);margin-bottom:18px}
 .reflect-body p:last-child{margin-bottom:0}
-.hl{font-weight:700}
-.hl1{color:var(--lime)}.hl2{color:var(--cyan)}.hl3{color:var(--mag)}.hl4{color:var(--amber)}
-
+.hl{color:var(--cyan);font-weight:600}
 .score{
   border-radius:20px;padding:34px;text-align:center;background:var(--surf);backdrop-filter:blur(14px);position:relative;overflow:hidden;
 }
@@ -330,13 +334,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .score::after{content:'';position:absolute;inset:0;border-radius:20px;
   background:radial-gradient(circle at 50% 20%,rgba(184,255,0,.06),transparent 60%);pointer-events:none}
 .score-val{
-  font-family:var(--fH);font-weight:700;font-size:60px;letter-spacing:.01em;
+  font-family:var(--fH);font-size:56px;letter-spacing:.04em;
   background:linear-gradient(135deg,var(--lime),var(--cyan));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 20px rgba(184,255,0,.45));margin-bottom:6px;
+  filter:drop-shadow(0 0 20px rgba(184,255,0,.45));margin-bottom:6px; font-weight: 600;
 }
-.score-lbl{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-family:var(--fM);margin-bottom:22px}
-.score-desc{font-family:var(--fB);font-size:12px;color:rgba(240,244,255,.55);line-height:1.7}
+.score-lbl{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-family:var(--fM);margin-bottom:20px}
+.score-desc{font-size:13px;color:rgba(232,238,255,.55);line-height:1.65; font-weight: 400;}
 
 /* FOOTER */
 footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80px;
@@ -365,7 +369,6 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
 <div id="cur"></div><div id="cur-ring"></div>
 <canvas id="bg"></canvas>
 
-<!-- NAV -->
 <nav>
   <div class="nav-pill">
     <div class="nav-logo"><span class="pulse"></span>HMD · ULIS</div>
@@ -379,7 +382,6 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
 
 <div class="wrap">
 
-<!-- ░░ HERO ░░ -->
 <section id="intro">
   <div class="hero-badge fu"><span class="dot"></span>System Boot · ULIS_Portfolio_v7.0</div>
   <div class="big-name fu d1">
@@ -394,19 +396,9 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
     </p>
 
     <div class="id-card">
-      <div class="profile-wrap" onclick="document.getElementById('avatarInput').click()" title="Nhấp để tải ảnh lên">
-        <img id="avatarImg" alt="Ảnh đại diện"/>
-        <div class="profile-placeholder" id="profPH">
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="24" cy="18" r="9" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M6 42c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-          <p>Ảnh đại diện</p>
-          <small>Nhấp để tải lên</small>
-        </div>
-        <div class="upload-hint"><span>Tải ảnh lên</span></div>
+      <div class="profile-wrap" style="cursor: default;">
+        <img id="avatarImg" src="Screenshot 2026-05-08 at 18.32.27.png" alt="Ảnh đại diện" style="display:block;"/>
       </div>
-      <input type="file" id="avatarInput" accept="image/*"/>
 
       <div class="id-body">
         <div class="id-name">Hoàng Mạnh Dũng</div>
@@ -427,7 +419,6 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
   </div>
 </section>
 
-<!-- ░░ MODULES ░░ -->
 <section id="assignments" class="sec">
   <div class="sec-head fu">
     <h2>06 Modules</h2>
@@ -435,50 +426,49 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
   </div>
   <div class="grid6">
 
-    <!-- BÀI 1 -->
     <div class="mod m1" id="card1" onclick="rip(event,this)">
       <div class="mod-num">01</div>
       <div class="mod-tag"><span class="sdot done"></span>Hoàn thành</div>
       <div class="mod-title">Quản lý tệp và thư mục</div>
       <div class="mod-desc">Xây dựng hệ thống lưu trữ Cloud khoa học, quy tắc đặt tên tệp tin và tối ưu hóa cấu trúc dữ liệu cá nhân.</div>
       <div class="pdf-zone">
-        <div class="pdf-drop" id="drop1" onclick="document.getElementById('pdfInput1').click()">
-          <span class="pdf-drop-icon">📄</span>
-          <span class="pdf-drop-txt">Thêm file PDF</span>
-          <span class="pdf-drop-hint">Nhấp để chọn tệp</span>
+        <div class="pdf-viewer" id="viewer1" style="display:block;">
+            <object data="tmpjsn7nt_thao-tac-co-ban-voi-tep-tin-va-thu-muc-.pdf#zoom=page-width&toolbar=0" type="application/pdf">
+                <embed src="tmpjsn7nt_thao-tac-co-ban-voi-tep-tin-va-thu-muc-.pdf#zoom=page-width&toolbar=0" type="application/pdf" />
+            </object>
         </div>
-        <div class="pdf-viewer" id="viewer1"><iframe id="frame1" src="" allow="fullscreen"></iframe></div>
         <div style="display:flex;flex-wrap:wrap;gap:0;margin-top:4px">
-          <a class="pdf-open" id="openLink1" href="#" target="_blank">Mở trong tab mới ↗</a>
-          <button class="pdf-clear" id="clear1" onclick="clearPdf(1)">× Xoá</button>
+          <a class="pdf-open" id="openLink1" href="tmpjsn7nt_thao-tac-co-ban-voi-tep-tin-va-thu-muc-.pdf" target="_blank" style="display:inline-flex;">Mở trong tab mới ↗</a>
         </div>
-        <input type="file" class="pdf-input" id="pdfInput1" accept=".pdf" onchange="loadPdf(1,this)"/>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Tiến độ</span><span>100%</span></div>
+        <div class="prog-bar"><div class="prog-fill pf1"></div></div>
       </div>
     </div>
 
-    <!-- BÀI 2 -->
     <div class="mod m2" id="card2" onclick="rip(event,this)">
       <div class="mod-num">02</div>
-      <div class="mod-tag"><span class="sdot wip"></span>Đang thực hiện</div>
+      <div class="mod-tag"><span class="sdot done" style="background:var(--cyan); box-shadow:0 0 7px var(--cyan);"></span>Hoàn thành</div>
       <div class="mod-title">Tìm kiếm và Đánh giá thông tin</div>
       <div class="mod-desc">Kỹ thuật thẩm định nguồn tin số, lọc nhiễu dữ liệu và xác thực tính học thuật của thông tin.</div>
       <div class="pdf-zone">
-        <div class="pdf-drop" id="drop2" onclick="document.getElementById('pdfInput2').click()">
-          <span class="pdf-drop-icon">📄</span>
-          <span class="pdf-drop-txt">Thêm file PDF</span>
-          <span class="pdf-drop-hint">Nhấp để chọn tệp</span>
+        <div class="pdf-viewer" id="viewer2" style="display:block;">
+            <object data="tmpynr2qj_bao-cao-tim-kiem-va-danh-gia-thong-tin-hoc-thuat.pdf#zoom=page-width&toolbar=0" type="application/pdf">
+                <embed src="tmpynr2qj_bao-cao-tim-kiem-va-danh-gia-thong-tin-hoc-thuat.pdf#zoom=page-width&toolbar=0" type="application/pdf" />
+            </object>
         </div>
-        <div class="pdf-viewer" id="viewer2"><iframe id="frame2" src="" allow="fullscreen"></iframe></div>
         <div style="display:flex;flex-wrap:wrap;gap:0;margin-top:4px">
-          <a class="pdf-open" id="openLink2" href="#" target="_blank">Mở trong tab mới ↗</a>
-          <button class="pdf-clear" id="clear2" onclick="clearPdf(2)">× Xoá</button>
+          <a class="pdf-open" id="openLink2" href="tmpynr2qj_bao-cao-tim-kiem-va-danh-gia-thong-tin-hoc-thuat.pdf" target="_blank" style="display:inline-flex;">Mở trong tab mới ↗</a>
         </div>
-        <input type="file" class="pdf-input" id="pdfInput2" accept=".pdf" onchange="loadPdf(2,this)"/>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Tiến độ</span><span>100%</span></div>
+        <div class="prog-bar"><div class="prog-fill pf2"></div></div>
       </div>
     </div>
 
-    <!-- BÀI 3 -->
-    <div class="mod m3" id="card3" onclick="rip(event,this)">
+    <div class="mod m3 locked" id="card3" onclick="rip(event,this)">
       <div class="mod-num">03</div>
       <div class="mod-tag"><span class="sdot wip"></span>Đang thực hiện</div>
       <div class="mod-title">Viết Prompt hiệu quả</div>
@@ -486,8 +476,8 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
       <div class="pdf-zone">
         <div class="pdf-drop" id="drop3" onclick="document.getElementById('pdfInput3').click()">
           <span class="pdf-drop-icon">📄</span>
-          <span class="pdf-drop-txt">Thêm file PDF</span>
-          <span class="pdf-drop-hint">Nhấp để chọn tệp</span>
+          <span class="pdf-drop-txt">Đang cập nhật</span>
+          <span class="pdf-drop-hint">Module locked</span>
         </div>
         <div class="pdf-viewer" id="viewer3"><iframe id="frame3" src="" allow="fullscreen"></iframe></div>
         <div style="display:flex;flex-wrap:wrap;gap:0;margin-top:4px">
@@ -496,10 +486,13 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
         </div>
         <input type="file" class="pdf-input" id="pdfInput3" accept=".pdf" onchange="loadPdf(3,this)"/>
       </div>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Tiến độ</span><span>60%</span></div>
+        <div class="prog-bar"><div class="prog-fill pf3"></div></div>
+      </div>
     </div>
 
-    <!-- BÀI 4 -->
-    <div class="mod m4" id="card4" onclick="rip(event,this)">
+    <div class="mod m4 locked" id="card4" onclick="rip(event,this)">
       <div class="mod-num">04</div>
       <div class="mod-tag"><span class="sdot wip"></span>Đang thực hiện</div>
       <div class="mod-title">Hợp tác trực tuyến</div>
@@ -507,8 +500,8 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
       <div class="pdf-zone">
         <div class="pdf-drop" id="drop4" onclick="document.getElementById('pdfInput4').click()">
           <span class="pdf-drop-icon">📄</span>
-          <span class="pdf-drop-txt">Thêm file PDF</span>
-          <span class="pdf-drop-hint">Nhấp để chọn tệp</span>
+          <span class="pdf-drop-txt">Đang cập nhật</span>
+          <span class="pdf-drop-hint">Module locked</span>
         </div>
         <div class="pdf-viewer" id="viewer4"><iframe id="frame4" src="" allow="fullscreen"></iframe></div>
         <div style="display:flex;flex-wrap:wrap;gap:0;margin-top:4px">
@@ -517,10 +510,13 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
         </div>
         <input type="file" class="pdf-input" id="pdfInput4" accept=".pdf" onchange="loadPdf(4,this)"/>
       </div>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Tiến độ</span><span>50%</span></div>
+        <div class="prog-bar"><div class="prog-fill pf4"></div></div>
+      </div>
     </div>
 
-    <!-- BÀI 5 -->
-    <div class="mod m5" id="card5" onclick="rip(event,this)">
+    <div class="mod m5 locked" id="card5" onclick="rip(event,this)">
       <div class="mod-num">05</div>
       <div class="mod-tag"><span class="sdot wip"></span>Đang thực hiện</div>
       <div class="mod-title">Sáng tạo nội dung với AI</div>
@@ -528,8 +524,8 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
       <div class="pdf-zone">
         <div class="pdf-drop" id="drop5" onclick="document.getElementById('pdfInput5').click()">
           <span class="pdf-drop-icon">📄</span>
-          <span class="pdf-drop-txt">Thêm file PDF</span>
-          <span class="pdf-drop-hint">Nhấp để chọn tệp</span>
+          <span class="pdf-drop-txt">Đang cập nhật</span>
+          <span class="pdf-drop-hint">Module locked</span>
         </div>
         <div class="pdf-viewer" id="viewer5"><iframe id="frame5" src="" allow="fullscreen"></iframe></div>
         <div style="display:flex;flex-wrap:wrap;gap:0;margin-top:4px">
@@ -538,10 +534,13 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
         </div>
         <input type="file" class="pdf-input" id="pdfInput5" accept=".pdf" onchange="loadPdf(5,this)"/>
       </div>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Tiến độ</span><span>45%</span></div>
+        <div class="prog-bar"><div class="prog-fill pf5"></div></div>
+      </div>
     </div>
 
-    <!-- BÀI 6 -->
-    <div class="mod m6" id="card6" onclick="rip(event,this)">
+    <div class="mod m6 locked" id="card6" onclick="rip(event,this)">
       <div class="mod-num">06</div>
       <div class="mod-tag"><span class="sdot wip"></span>Đang thực hiện</div>
       <div class="mod-title">AI có trách nhiệm</div>
@@ -549,8 +548,8 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
       <div class="pdf-zone">
         <div class="pdf-drop" id="drop6" onclick="document.getElementById('pdfInput6').click()">
           <span class="pdf-drop-icon">📄</span>
-          <span class="pdf-drop-txt">Thêm file PDF</span>
-          <span class="pdf-drop-hint">Nhấp để chọn tệp</span>
+          <span class="pdf-drop-txt">Đang cập nhật</span>
+          <span class="pdf-drop-hint">Module locked</span>
         </div>
         <div class="pdf-viewer" id="viewer6"><iframe id="frame6" src="" allow="fullscreen"></iframe></div>
         <div style="display:flex;flex-wrap:wrap;gap:0;margin-top:4px">
@@ -559,12 +558,15 @@ footer{border-top:1px solid rgba(255,255,255,.04);padding-top:32px;margin-top:80
         </div>
         <input type="file" class="pdf-input" id="pdfInput6" accept=".pdf" onchange="loadPdf(6,this)"/>
       </div>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Tiến độ</span><span>40%</span></div>
+        <div class="prog-bar"><div class="prog-fill pf6"></div></div>
+      </div>
     </div>
 
   </div>
 </section>
 
-<!-- ░░ REFLECTION ░░ -->
 <section id="reflection" class="sec">
   <div class="sec-head fu">
     <h2>Tổng kết</h2>
@@ -604,19 +606,8 @@ document.addEventListener('mousedown',()=>{
 });
 document.addEventListener('mouseup',()=>{cur.style.transform='translate(-50%,-50%) scale(1)'});
 
-/* ── AVATAR ── */
-document.getElementById('avatarInput').addEventListener('change',function(){
-  if(!this.files||!this.files[0])return;
-  const r=new FileReader();
-  r.onload=e=>{
-    const img=document.getElementById('avatarImg');
-    img.src=e.target.result;img.style.display='block';
-    document.getElementById('profPH').style.display='none';
-  };
-  r.readAsDataURL(this.files[0]);
-});
 
-/* ── PDF EMBED (no-code, client-side via blob URL) ── */
+/* ── PDF EMBED (for dynamic uploading on modules 3,4,5,6) ── */
 const pdfBlobs={};
 
 function loadPdf(n,input){
@@ -762,6 +753,14 @@ function rip(e,el){
   }
   draw();
 })();
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){en.target.classList.add('visible','in');obs.unobserve(en.target)}
+  });
+},{threshold:.07,rootMargin:'0px 0px -28px 0px'});
+document.querySelectorAll('.reveal,.mod').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
